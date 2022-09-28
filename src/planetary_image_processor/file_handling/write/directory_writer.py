@@ -15,6 +15,8 @@ class DirectoryWriter(Writer):
         super().__init__(path)
         self.formatter = f"{path}/{prefix}_{format_num}{ext}"
         self.Writer = self.get_writer(ext)  # pylint:disable=invalid-name
+        if not self.Writer:
+            raise ValueError(f"Could not find Writer for ext {ext}")
         self.count = 0
 
     @classmethod
@@ -22,6 +24,7 @@ class DirectoryWriter(Writer):
         for fmts, Writer_ in cls.writers.items():
             if ext in fmts:
                 return Writer_
+        return None
 
     @property
     def writer(self) -> Writer:
