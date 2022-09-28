@@ -1,7 +1,8 @@
 import os
-from typing import Any, Iterable
+from typing import Iterable
 
 from planetary_image_processor.file_handling.constants import IMAGE_FORMATS, VIDEO_FORMATS
+from planetary_image_processor.types.frame import Frame
 
 from .base import Reader
 from .image_reader import ImageReader
@@ -23,8 +24,5 @@ class MediaReader(Reader):
             if ext in fmts:
                 return Reader_(path)
 
-    def read(self) -> Any:
-        return self.reader.read()
-
-    def frames(self) -> Iterable[Any]:
+    def frames(self) -> Iterable[Frame]:
         return self.reader.frames()

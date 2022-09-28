@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import Any, Iterable
+from typing import Iterable
 
-import cv2
+from planetary_image_processor.types.frame import Frame
 
 
 class Reader(ABC):
@@ -11,9 +11,5 @@ class Reader(ABC):
         self.path = path
 
     @abstractmethod
-    def read(self) -> Any:
-        ...
-
-    @abstractmethod
-    def frames(self) -> Iterable[cv2.Mat]:
+    def frames(self) -> Iterable[Frame]:
         ...

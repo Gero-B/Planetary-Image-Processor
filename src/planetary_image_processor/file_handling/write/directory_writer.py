@@ -1,6 +1,7 @@
-from typing import Any
+from typing import Iterable, Union
 
 from planetary_image_processor.file_handling.constants import IMAGE_FORMATS
+from planetary_image_processor.types.frame import Frame
 
 from .base import Writer
 from .image_writer import ImageWriter
@@ -31,6 +32,6 @@ class DirectoryWriter(Writer):
         path = self.formatter.format(self.count)
         return self.Writer(path)
 
-    def write(self, obj: Any):
+    def write(self, obj: Union[Frame, Iterable[Frame]]):
         self.writer.write(obj)
         self.count += 1

@@ -1,13 +1,11 @@
-from typing import Any, Iterable
+from typing import Iterable
 
 import cv2
+from planetary_image_processor.types.frame import Frame
 
 from .base import Reader
 
 
 class ImageReader(Reader):
-    def read(self, flags=None) -> Any:
-        return cv2.imread(self.path, flags=flags)
-
-    def frames(self, **kwargs) -> Iterable[Any]:
-        return [self.read(**kwargs)]
+    def frames(self, flags=None) -> Iterable[Frame]:
+        yield cv2.imread(self.path, flags=flags)
